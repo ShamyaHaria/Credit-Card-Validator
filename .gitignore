@@ -1,0 +1,21 @@
+# Go binary files
+/bin/
+/build/
+
+# Go module files
+/go.sum
+/go.mod
+
+# IDE or Editor specific files
+.vscode/
+/.idea/
+/*.swp
+*.sublime-workspace
+*.sublime-project
+
+# MacOS specific files
+.DS_Store
+
+# Other files/folders you want to ignore
+*.log
+*.tmp

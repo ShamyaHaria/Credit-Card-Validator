@@ -63,14 +63,14 @@ type Response struct {
 }
 
 func validateHandler(w http.ResponseWriter, r *http.Request){
-	if r.method != http.methodPost{
+	if r.Method != http.MethodPost{
 		http.Error(w, `{"error":"Invalid request method"}`,http.StatusMethodNotAllowed)
 		return
 	}
 
 	var req Request
 	err := json.NewDecoder(r.Body).Decode(&req)
-	if err!-nil || req.CardNumber == "" {
+	if err!=nil || req.CardNumber == "" {
 		http.Error(w, `{"error":"Invalid JSON payload. Please provide a valid card number field}"}`,http.StatusBadRequest)
 		return
 	}

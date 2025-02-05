@@ -62,33 +62,35 @@ type Response struct {
 	CardType   string `json:"card_type"`
 }
 
-func validateHandler(w http.ResponseWriter, r *http.Request){
-	if r.Method != http.MethodPost{
-		http.Error(w, `{"error":"Invalid request method"}`,http.StatusMethodNotAllowed)
-		return
-	}
+func validateHandler(w http.ResponseWriter, r *http.Request) {
+    // Set CORS headers
+    w.Header().Set("Access-Control-Allow-Origin", "*")
+    w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-	var req Request
-	err := json.NewDecoder(r.Body).Decode(&req)
-	if err!=nil || req.CardNumber == "" {
-		http.Error(w, `{"error":"Invalid JSON payload. Please provide a valid card number field}"}`,http.StatusBadRequest)
-		return
-	}
+    // Handle preflight (OPTIONS) request
+    if r.Method == http.MethodOptions {
+        w.WriteHeader(http.StatusNoContent)
+        return
+    }
 
-	req.CardNumber = strings.ReplaceAll(req.CardNumber, " ","")
-	req.CardNumber = strings.ReplaceAll(req.CardNumber, "-","")
+    if r.Method != http.MethodPost {
+        http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+        return
+    }
 
-	if _,err := strconv.Atoi(req.CardNumber); err!=nil{
-		http.Error(w,`{"error":"Card Number must contain only digits."}`,http.StatusBadRequest)
-		return
-	}
+    var req Request
+    err := json.NewDecoder(r.Body).Decode(&req)
+    if err != nil || req.CardNumber == "" {
+        http.Error(w, "Invalid JSON payload", http.StatusBadRequest)
+        return
+    }
 
-	valid:=isValidLuhn(req.CardNumber)
-	cardType:=getCardNetwork(req.CardNumber)
+    valid := isValidLuhn(req.CardNumber)
+    resp := Response{Valid: valid}
 
-	resp:= Response{Valid: valid, CardType: cardType}
-	w.Header().Set("Content-Type","application/json")
-	json.NewEncoder(w).Encode(resp)
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(resp)
 }
 
 func main() {

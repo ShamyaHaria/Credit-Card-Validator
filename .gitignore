@@ -1,21 +1,42 @@
-# Go binary files
+# Node.js
+/node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+.pnpm-debug.log
+
+# Tailwind CSS
+*.tailwindcss/
+tailwind.config.js
+postcss.config.js
+
+# Docker
+.docker/
+docker-compose.override.yml
+Dockerfile
+docker-compose.yml
+
+# Go
 /bin/
+/pkg/
+/vendor/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Vite
+/dist/
+.vite/
+
+# React
 /build/
+.eslintcache
+*.env
+*.env.local
+*.env.*.local
+.cache/
 
-# Go module files
-/go.sum
-/go.mod
-
-# IDE or Editor specific files
-.vscode/
-/.idea/
-/*.swp
-*.sublime-workspace
-*.sublime-project
-
-# MacOS specific files
 .DS_Store
-
-# Other files/folders you want to ignore
-*.log
-*.tmp

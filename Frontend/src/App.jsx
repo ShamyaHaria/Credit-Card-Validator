@@ -1,59 +1,94 @@
 import { useState } from "react";
-import axios from "axios";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import visaLogo from "/assets/img/visa.png";
+import mastercardLogo from "/assets/img/mastercard.png";
+import amexLogo from "/assets/img/amex.png";
+import dinersLogo from "/assets/img/diners.png";
+import rupayLogo from "/assets/img/rupay.png";
+import jcbLogo from "/assets/img/jcb.png";
+import discoverLogo from "/assets/img/discover.png";
 
-function App() {
+export default function App() {
   const [cardNumber, setCardNumber] = useState("");
-  const [response, setResponse] = useState(null);
-  const [error, setError] = useState(null);
+  const [cardType, setCardType] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setResponse(null);
-    setError(null);
+  const detectCardType = (number) => {
+    const regexPatterns = {
+      visa: /^4/,
+      mastercard: /^5[1-5]/,
+      amex: /^3[47]/,
+      diners: /^3(?:0[0-5]|[68])/, 
+      rupay: /^6(?:0|5)/,
+      jcb: /^(?:2131|1800|35)/,
+      discover: /^6(?:011|5)/,
+    };
 
-    try {
-      const res = await axios.post("http://localhost:8080/validate", {
-        card_number: cardNumber,
-      });
-
-      setResponse(res.data);
-    } catch (err) {
-      setError(err.response ? err.response.data.error : "Server error");
+    for (const [type, pattern] of Object.entries(regexPatterns)) {
+      if (pattern.test(number)) {
+        return type;
+      }
     }
+    return null;
+  };
+
+  const handleValidation = () => {
+    const detectedType = detectCardType(cardNumber);
+    setCardType(detectedType);
+  };
+
+  const cardLogos = {
+    visa: visaLogo,
+    mastercard: mastercardLogo,
+    amex: amexLogo,
+    diners: dinersLogo,
+    rupay: rupayLogo,
+    jcb: jcbLogo,
+    discover: discoverLogo,
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-semibold text-center mb-4">Credit Card Validator</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            placeholder="Enter card number"
-            value={cardNumber}
-            onChange={(e) => setCardNumber(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-          />
-          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
-            Validate
-          </button>
-        </form>
-
-        {response && (
-          <div className="mt-4 p-4 bg-green-100 text-green-700 rounded-lg">
-            <p><strong>Valid:</strong> {response.valid ? "✅ Yes" : "❌ No"}</p>
-            {response.card_type && <p><strong>Card Type:</strong> {response.card_type}</p>}
-          </div>
-        )}
-
-        {error && (
-          <div className="mt-4 p-4 bg-red-100 text-red-700 rounded-lg">
-            <p>{error}</p>
-          </div>
-        )}
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-black text-gold">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9 }} 
+        animate={{ opacity: 1, scale: 1 }} 
+        transition={{ duration: 0.5 }}
+        className="p-10 rounded-2xl shadow-xl border-2 border-gold bg-black"
+      >
+        <h1 className="text-3xl font-bold text-white text-center mb-6">Credit Card Validator</h1>
+        <Card className="p-6 border-gold bg-black text-gold shadow-lg">
+          <CardContent className="flex flex-col items-center gap-4">
+            <Input
+              type="text"
+              placeholder="Enter your card number"
+              value={cardNumber}
+              onChange={(e) => setCardNumber(e.target.value)}
+              className="w-full p-4 rounded-md border-2 border-gold bg-black text-gold focus:outline-none focus:ring-2 focus:ring-gold"
+            />
+            <div className="w-full flex justify-center mt-6">
+              <Button 
+                onClick={handleValidation}
+                className="px-6 py-3 bg-gold text-black font-bold rounded-lg shadow-md hover:shadow-lg"
+              >
+                Validate
+              </Button>
+            </div>
+            {cardType && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="mt-6 flex flex-col items-center"
+              >
+                <p className="text-lg text-gold">Detected Card Type:</p>
+                <img src={cardLogos[cardType]} alt={cardType} className="w-24 mt-2" />
+              </motion.div>
+            )}
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
   );
 }
-
-export default App;

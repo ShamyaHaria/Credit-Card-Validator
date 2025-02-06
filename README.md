@@ -15,8 +15,8 @@ The Credit Card Validator is a web-based application that allows users to check 
 
 <div style="display: flex; justify-content: space-around; align-items: center; gap: 20px;">
 
+  <img src="Frontend/assets/img/visa.png" width="130" height="100" />
   <img src="Frontend/assets/img/mastercard.png" width="150" height="100" />
-  <img src="Frontend/assets/img/visa.png" width="150" height="50" />
   <img src="Frontend/assets/img/diners.png" width="175" height="100" />
   <img src="Frontend/assets/img/amex.png" width="100" height="100" />
   <img src="Frontend/assets/img/rupay.png" width="125" height="100" />

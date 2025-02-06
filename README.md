@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Credit Card Validator
 
 🚀 **Overview**
@@ -111,3 +112,7 @@ docker run -p 8080:8080 credit-card-validator
 📜 **License**
 
 This project is licensed under the [Apache 2.0 License](https://github.com/ShamyaHaria/Credit-Card-Validator/blob/main/LICENSE).
+=======
+# Credit-Card-Validator
+An efficient API to validate Credit Cards and detect associated payment networks in real-time.
+>>>>>>> parent of 3a3f771 (Creating Readme file)

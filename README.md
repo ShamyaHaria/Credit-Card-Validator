@@ -67,7 +67,7 @@ cd Backend
 go mod tidy
 go run main.go
 ```
-The Backend will start on ```http://localhost:8080```
+The Backend will start on [http://localhost:8080](http://localhost:8080)
 
 3️⃣ **Frontend Setup**
 

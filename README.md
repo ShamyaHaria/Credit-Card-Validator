@@ -11,8 +11,6 @@ The Credit Card Validator is a web-based application that allows users to check 
 - Smooth User Experience: Well-structured input fields, responsive design, and clear feedback.
 - Dockerized Deployment: Easily run the application using Docker.
 
-- Supports multiple card types:
-
 ### Supports multiple card types:
 
 <div style="display: flex; justify-content: space-around; align-items: center; gap: 20px;">

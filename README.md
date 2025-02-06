@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Credit Card Validator
 
 🚀 **Overview**
@@ -16,13 +15,13 @@ The Credit Card Validator is a web-based application that allows users to check 
 
 <div style="display: flex; justify-content: space-around; align-items: center; gap: 20px;">
 
-  <img src="Frontend/assets/img/visa.png" width="130" height="100" />
-  <img src="Frontend/assets/img/mastercard.png" width="150" height="100" />
-  <img src="Frontend/assets/img/diners.png" width="175" height="100" />
-  <img src="Frontend/assets/img/amex.png" width="100" height="100" />
-  <img src="Frontend/assets/img/rupay.png" width="125" height="100" />
-  <img src="Frontend/assets/img/jcb.png" width="150" height="100" />
-  <img src="Frontend/assets/img/discover.png" width="125" height="125" />
+<img src="Frontend/assets/img/visa.png" width="130" height="100" />
+<img src="Frontend/assets/img/mastercard.png" width="150" height="100" />
+<img src="Frontend/assets/img/diners.png" width="175" height="100" />
+<img src="Frontend/assets/img/amex.png" width="100" height="100" />
+<img src="Frontend/assets/img/rupay.png" width="125" height="100" />
+<img src="Frontend/assets/img/jcb.png" width="150" height="100" />
+<img src="Frontend/assets/img/discover.png" width="125" height="125" />
 </div>
 
 
@@ -88,15 +87,15 @@ docker run -p 8080:8080 credit-card-validator
 
 📝 **API Endpoints**
 
-| Method | Endpoint     | Description                            |
+| Method | Endpoint | Description |
 |--------|--------------|----------------------------------------|
-| POST   | /validate    | Validates a credit card number         |
+| POST | /validate | Validates a credit card number |
 
 **Example Request (POST /validate):**
 
 ```json
 {
-  "card_number": "4111111111111111"
+"card_number": "4111111111111111"
 }
 ```
 
@@ -104,15 +103,11 @@ docker run -p 8080:8080 credit-card-validator
 
 ```json
 {
-  "valid": true,
-  "card_type": "Visa"
+"valid": true,
+"card_type": "Visa"
 }
 ```
 
 📜 **License**
 
 This project is licensed under the [Apache 2.0 License](https://github.com/ShamyaHaria/Credit-Card-Validator/blob/main/LICENSE).
-=======
-# Credit-Card-Validator
-An efficient API to validate Credit Cards and detect associated payment networks in real-time.
->>>>>>> parent of 3a3f771 (Creating Readme file)
